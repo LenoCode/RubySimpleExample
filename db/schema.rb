@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_07_124944) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_07_214733) do
   create_table "api_tokens", force: :cascade do |t|
     t.text "token", null: false
     t.integer "user_id", null: false
@@ -18,6 +18,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_07_124944) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_api_tokens_on_user_id"
+  end
+
+  create_table "books", force: :cascade do |t|
+    t.string "title"
+    t.integer "copies"
+    t.integer "author_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_books_on_author_id"
   end
 
   create_table "user_roles", force: :cascade do |t|
@@ -42,6 +51,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_07_124944) do
   end
 
   add_foreign_key "api_tokens", "users"
+  add_foreign_key "books", "users", column: "author_id"
   add_foreign_key "xref_user_roles", "user_roles"
   add_foreign_key "xref_user_roles", "users"
 end
