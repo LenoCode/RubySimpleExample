@@ -12,7 +12,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       defaults format: :json do
         #User controlllers
-          post "user/create", to: "user#create"
+        post "user/create", to: "user#create"
+        get  "user/valid/token", to: "user#is_valid_token"
         #---------------------------------------
 
       end
