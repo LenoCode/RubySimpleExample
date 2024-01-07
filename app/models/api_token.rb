@@ -8,7 +8,6 @@ class ApiToken < ApplicationRecord
 
   private
   def generate_token_for
-    puts "Creating random token"
     self.token = Digest::MD5::hexdigest(SecureRandom.hex)
   end
 end
