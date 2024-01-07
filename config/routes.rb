@@ -11,7 +11,10 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       defaults format: :json do
-        post "user/create", to: "user#create"
+        #User controlllers
+          post "user/create", to: "user#create"
+        #---------------------------------------
+
       end
     end
   end
