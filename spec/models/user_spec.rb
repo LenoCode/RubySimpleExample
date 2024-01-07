@@ -10,8 +10,13 @@ RSpec.describe User, type: :model do
         ruby_user.valid?
         expect(ruby_user.errors[":name"]).to include("Cant be number, only letters")
       end
+    end
 
-
+    context "Valid examples" do
+      it 'Passing regular name as valid example' do
+        ruby_user = User.create name: "Ruby"
+        expect(ruby_user).to be_valid
+      end
     end
   end
 

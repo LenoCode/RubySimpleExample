@@ -7,4 +7,13 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
+  namespace :api do
+    namespace :v1 do
+      defaults format: :json do
+        post "user/create", to: "user#create"
+      end
+    end
+  end
+
 end
