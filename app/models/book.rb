@@ -3,7 +3,11 @@ class Book < ApplicationRecord
 
   validate :validate_book
 
-
+=begin
+    Simple method to filter by title.
+    If book bas title Book1 and parameter title is Book, then that book will
+    be found
+=end
   def self.filter_by_title(title)
     where("LOWER(title) LIKE ?", "%#{title}%")
   end

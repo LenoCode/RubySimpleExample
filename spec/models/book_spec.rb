@@ -2,6 +2,18 @@ require 'rails_helper'
 
 RSpec.describe Book, type: :model do
 
+  before(:all) do
+
+    user = User.create! name:"RubyAuthor"
+    role = UserRole.create!(name: "Author")
+    XrefUserRole.create! user:user, user_role:role
+
+    Book.create! title:"Book1-life", copies: 120, author: user
+    Book.create! title:"Book2-social", copies: 120, author: user
+    Book.create! title:"Book3-code", copies: 120, author: user
+
+
+  end
 
   describe "Simple validation" do
 
@@ -36,6 +48,38 @@ RSpec.describe Book, type: :model do
 
     end
 
+  end
+
+
+  describe "Book filtering" do
+
+    context "Book title filtering" do
+
+      it "Filter book by complete name" do
+        book_name = "Book1-life"
+        result = Book.filter_by_title(book_name)
+        expect(result.size).to eq(1)
+
+        result.each do |book|
+          expect(book.title).to eq(book_name)
+        end
+      end
+
+      it "Filter book by part name" do
+        book_name = "Book"
+        result = Book.filter_by_title(book_name)
+
+        expect(result.size).to eq(3)
+        result.each do |book|
+          expect(book.title).to include(book_name)
+        end
+      end
+    end
+
+  end
+
+  after(:all) do
+    Book.delete_all
   end
 
 end
