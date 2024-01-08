@@ -74,6 +74,29 @@ RSpec.describe Book, type: :model do
           expect(book.title).to include(book_name)
         end
       end
+
+      it "Filter book by part name title and part name author" do
+        book_name = "Book1"
+        author_name = "rub"
+
+        result = Book.filter_by_title_and_author(book_name,author_name)
+        expect(result.size).to eq(1)
+        result.each do |book|
+          expect(book.title).to include(book_name)
+          expect(book.author.name).to include("RubyAuthor")
+        end
+
+      end
+
+      it "Filter book by part name title and wrong author" do
+        book_name = "Book1"
+        author_name = "java"
+
+        result = Book.filter_by_title_and_author(book_name,author_name)
+        expect(result.size).to eq(0)
+
+      end
+
     end
 
   end
