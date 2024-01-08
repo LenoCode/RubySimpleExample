@@ -14,6 +14,7 @@ Rails.application.routes.draw do
         #User controlllers
         post "user/create", to: "user#create"
         get  "user/valid/token", to: "user#is_valid_token"
+        post "user/role/add", to: "user#add_user_role"
         #---------------------------------------
 
       end
