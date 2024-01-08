@@ -3,6 +3,11 @@ class Book < ApplicationRecord
 
   validate :validate_book
 
+
+  def self.filter_by_title(title)
+    where("LOWER(title) LIKE ?", "%#{title}%")
+  end
+
   private
 
   def validate_book
