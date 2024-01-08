@@ -12,6 +12,21 @@ class Book < ApplicationRecord
     where("LOWER(title) LIKE ?", "%#{title}%")
   end
 
+
+=begin
+ Simple method to filter by title and author.
+   If book bas title Book1 and parameter title is Book, then that book will.
+   Also if author is not nil, then it will filter through that also
+ be found
+=end
+  def self.filter_by_title_and_author(title,author)
+    result = where("LOWER(title) LIKE ?", "%#{title}%")
+    if !author.nil?
+      return result.joins(:author).where("LOWER(users.name) LIKE ?","%#{author}%")
+    end
+    result
+  end
+
   private
 
   def validate_book
